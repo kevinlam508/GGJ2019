@@ -1,0 +1,27 @@
+say "chicken"
+say "cluck"
+$ ShowPerson(0, 0, .1)
+say "person 0, sprite 0, pos .1"
+$ ShowPerson(0, 0, .5)
+say "person 0, sprite 0, pos .5"
+$ ShowPerson(0, 0, .9)
+say "person 0, sprite 0, pos .9"
+$ ShowPerson(0, 1, .5)
+say "person 0, sprite 1, pos .5"
+$ HidePerson(0)
+say "hide person 0"
+$ ShowPerson(0, 0, .5)
+say "person 0, sprite 0, pos .9"
+$ ShowBackground(0)
+say "room"
+$ ShowPerson(0, 0, .9)
+say "person 0, sprite 0, pos .9"
+$ ShowPerson(0, 1, .5)
+say "person 0, sprite 1, pos .5"
+$ ShowBackground(1)
+say "hall"
+say "minigame start"
+$ StartingMinigame()
+pause 0
+say "minigame end"
+say "peck"
