@@ -1,23 +1,63 @@
+$ edward = GetEdwardVal()
+$ lauren = GetLaurenVal()
+$ lilli = GetLilliVal()
+$ maxine = GetMaxineVal()
+$ sarah = GetSarahVal()
+$ ShowBackground(1)
+$ ShowPerson(edward, 0, .1)
+$ ShowPerson(lauren, 0, .5)
+$ ShowPerson(lilli, 0, .9)
+say edward "edward"
+say lauren "laruen"
+say lilli "lilli"
+say lauren "laruen"
+say "moo"
+say edward "edward"
+say edward "edward"
+say "cow"
+say edward "edward"
+say lauren "laruen"
+say lilli "lilli"
+say edward "edward"
+$ ClearPeople()
+$ ShowPerson(maxine, 0, .5)
+say maxine "yay"
+$ ShowPerson(maxine, 0, .3)
+say maxine "yay"
+$ ShowPerson(maxine, 0, .2)
+say maxine "yay"
 say "chicken"
 say "cluck"
-$ ShowPerson(0, 0, .1)
-say "person 0, sprite 0, pos .1"
-$ ShowPerson(0, 0, .5)
-say "person 0, sprite 0, pos .5"
-$ ShowPerson(0, 0, .9)
-say "person 0, sprite 0, pos .9"
-$ ShowPerson(0, 1, .5)
-say "person 0, sprite 1, pos .5"
-$ HidePerson(0)
-say "hide person 0"
-$ ShowPerson(0, 0, .5)
-say "person 0, sprite 0, pos .9"
-$ ShowBackground(0)
-say "room"
-$ ShowPerson(0, 0, .9)
-say "person 0, sprite 0, pos .9"
-$ ShowPerson(0, 1, .5)
-say "person 0, sprite 1, pos .5"
+choice "bef":
+	clear choices
+	say "bef"
+choice "chicn":
+	clear choices
+	say "chicn"
+	choice "chicn nugger":
+		clear choices
+		say "chicn nugger"
+	choice "chiglenugly":
+		clear choices
+		say "chiglenugly"
+	choose
+choose
+
+$ EnableDoors()
+choice "door 1":
+	clear choices
+	say "door 1"
+choice "door 2":
+	clear choices
+	say "door 2"
+choice "door 3":
+	clear choices
+	say "door 3"
+choice "door 4":
+	clear choices
+	say "door 4"
+choose
+
 $ ShowBackground(1)
 say "hall"
 say "minigame start"
