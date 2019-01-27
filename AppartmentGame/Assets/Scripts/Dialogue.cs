@@ -63,6 +63,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] GameObject doors;
     [SerializeField] GameObject menu;
     [SerializeField] GameObject arcade;
+    [SerializeField] GameObject bedroom;
 
     // progress tracking
     private static int NO_TRINKET = 0;
@@ -115,6 +116,7 @@ public class Dialogue : MonoBehaviour
         SetUpSpecialButtons(doors);
         SetUpSpecialButtons(menu);
         SetUpSpecialButtons(arcade);
+        SetUpSpecialButtons(bedroom);
 
 
 #if UNITY_EDITOR
@@ -162,6 +164,8 @@ public class Dialogue : MonoBehaviour
                 () => { EnableSpecialButtons(menu); });
             rumor.Bindings.Bind("EnableArcade", 
                 () => { EnableSpecialButtons(arcade); });
+            rumor.Bindings.Bind("EnableBedroom", 
+                () => { EnableSpecialButtons(bedroom); });
             rumor.Bindings.Bind("GetPlayerName", GetPlayerName);
             rumor.Bindings.Bind("SetPlayerName", SetPlayerName);
 
