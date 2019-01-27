@@ -60,20 +60,28 @@ public class Dialogue : MonoBehaviour
     // special choices
     [SerializeField] GameObject doors;
     [SerializeField] GameObject menu;
+    [SerializeField] GameObject arcade;
 
     // progress tracking
     private static int NO_TRINKET = 0;
     private int[] trinketState;
     int numTrinkets = 0;
     [SerializeField] GameObject trinkets;
+    [SerializeField] SpriteSwitcher polaroid;
 
     // minigames
     [SerializeField] GameObject foodJenga;
+
+    // sound mixer
+    [SerializeField] SoundMixer soundMixer;
+
+    [SerializeField] AudioSource knocking;
 
     // Start is called before the first frame update
     void Start()
     {
         trinketState = new int[4];
+        polaroid.HideSprite();
 
         screenWidth = ((RectTransform)textBox.gameObject
             .GetComponent<Transform>().parent
@@ -97,11 +105,10 @@ public class Dialogue : MonoBehaviour
         }
         DisableChoices();
 
-        // set up doors
+        // set up special
         SetUpSpecialButtons(doors);
-
-        // set up menu
         SetUpSpecialButtons(menu);
+        SetUpSpecialButtons(arcade);
 
 
 #if UNITY_EDITOR
@@ -147,12 +154,22 @@ public class Dialogue : MonoBehaviour
                 () => { EnableSpecialButtons(doors); });
             rumor.Bindings.Bind("EnableMenu", 
                 () => { EnableSpecialButtons(menu); });
+            rumor.Bindings.Bind("EnableArcade", 
+                () => { EnableSpecialButtons(arcade); });
             rumor.Bindings.Bind("GetPlayerName", GetPlayerName);
             rumor.Bindings.Bind("SetPlayerName", SetPlayerName);
 
             // trinkets
             rumor.Bindings.Bind<int, bool>("IsFinished", IsFinished);
             rumor.Bindings.Bind<int, int>("GetTrinket", GetTrinket);
+
+            // sound
+            rumor.Bindings.Bind<int>("SwitchToTrack", 
+                (i) => {soundMixer.SwitchToTrack((AudioTracks)i); });
+
+            rumor.Bindings.Bind<int>("ShowPolaroid", ShowPolaroid);
+            rumor.Bindings.Bind("HidePolaroid", HidePolaroid);
+            rumor.Bindings.Bind("Knocking", () => { knocking.Play(); });
 
             StartCoroutine(rumor.Start());
 
@@ -464,6 +481,13 @@ public class Dialogue : MonoBehaviour
     }
     void EnableBackground(){
         backgrounds.gameObject.SetActive(true);
+    }
+
+    void ShowPolaroid(int idx){
+        polaroid.ShowSprite(idx);
+    }
+    void HidePolaroid(){
+        polaroid.HideSprite();
     }
 
     void ClearPeople(){

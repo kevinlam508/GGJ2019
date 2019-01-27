@@ -16,12 +16,19 @@ public class FoodJengaManager : MonoBehaviour
 	[SerializeField] float clickDelay = 1f;
 	private int lives = 3;
 
+	// progress tracking
 	private int[] eatenCount;
     HashSet<int> finishedIdx;
 
     [SerializeField] SpriteSwitcher2 lifeVisual;
 
     public event Action OnEnd;
+
+    // sound
+    private AudioSource crunchAudio;
+    [SerializeField] AudioClip[] crunch;
+    private AudioSource disgustAudio;
+    [SerializeField] AudioClip[] disgust;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +43,9 @@ public class FoodJengaManager : MonoBehaviour
         finishedIdx = new HashSet<int>();
         RandomTarget();
         gameObject.SetActive(false);
+
+    	crunchAudio = GetComponents<AudioSource>()[0];
+    	disgustAudio = GetComponents<AudioSource>()[1];
     }
 
     // Update is called once per frame
@@ -59,8 +69,13 @@ public class FoodJengaManager : MonoBehaviour
     }
 
     public void Eaten(int foodIdx){
-    	if(foodIdx != targetIdx)
+    	if(foodIdx != targetIdx){
     		lives--;
+    		PlayDisgust();
+    	}
+    	else {
+    		PlayCrunch();
+    	}
     	EatFood(foodIdx);
     	RandomTarget();
     	StartCoroutine(DisableClicking());
@@ -121,6 +136,7 @@ public class FoodJengaManager : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D col){
+    	PlayDisgust();
     	lives--;
     	EatFood(col.gameObject.GetComponent<FoodJengaFood>().foodIdx);
     	RandomTarget();
@@ -128,5 +144,15 @@ public class FoodJengaManager : MonoBehaviour
 
     void EatFood(int food){
     	eatenCount[food]++;
+    }
+
+    void PlayCrunch(){
+    	crunchAudio.clip = crunch[UnityEngine.Random.Range(0, crunch.Length)];
+    	crunchAudio.Play();
+    }
+
+    void PlayDisgust(){
+    	disgustAudio.clip = disgust[UnityEngine.Random.Range(0, disgust.Length)];
+    	disgustAudio.Play();
     }
 }

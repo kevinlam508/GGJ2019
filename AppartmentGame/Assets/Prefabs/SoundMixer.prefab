@@ -44,4 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 0.1
-  music: []
+  music:
+  - {fileID: 8300000, guid: e51498d4416899a4ca286ba72b569f4d, type: 3}
+  - {fileID: 8300000, guid: 3703a60e5d88d914e8ea4af4b8151010, type: 3}
+  - {fileID: 8300000, guid: 86568e9899f529d4bad89ab54c9a2d86, type: 3}
+  - {fileID: 8300000, guid: e1c98d7956e219841b2d802d910c49ba, type: 3}
+  - {fileID: 8300000, guid: b1bb008e641cd0549a10676cc36fe12f, type: 3}
+  - {fileID: 8300000, guid: d36fd5c9ed0b8f748a84760457e58e95, type: 3}
+  - {fileID: 8300000, guid: 222b563470cc45b438bef2f9f39ec901, type: 3}

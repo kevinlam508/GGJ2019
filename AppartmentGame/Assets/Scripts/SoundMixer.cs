@@ -20,6 +20,8 @@ public class SoundMixer : MonoBehaviour
 	[SerializeField] float fadeSpeed = .1f;
 	[SerializeField] AudioClip[] music;
 
+	private static int NO_TRACKS = 0;
+	private static int ALL_TRACKS = -1;
 	private int fadeInTracks;
 	private int fadeOutTracks;
 	private AudioSource[] tracks;
@@ -84,9 +86,16 @@ public class SoundMixer : MonoBehaviour
     	fadeInTracks |= flag;
     	fadeOutTracks &= (~flag);
     }
+
     public void MakeFadeOut(int track){
     	int flag = 1 << (int)track;
     	fadeOutTracks |= flag;
     	fadeInTracks &= (~flag);
+    }
+
+    public void SwitchToTrack(AudioTracks track){
+    	fadeInTracks = NO_TRACKS;
+    	fadeOutTracks = ALL_TRACKS;
+    	MakeFadeIn(track);
     }
 }
