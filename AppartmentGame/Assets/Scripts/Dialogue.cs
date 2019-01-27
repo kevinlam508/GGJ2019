@@ -78,6 +78,8 @@ public class Dialogue : MonoBehaviour
     [SerializeField] SoundMixer soundMixer;
 
     [SerializeField] AudioSource knocking;
+    [SerializeField] AudioSource doorOpen;
+    [SerializeField] AudioSource click;
 
     // Start is called before the first frame update
     void Start()
@@ -172,6 +174,7 @@ public class Dialogue : MonoBehaviour
             rumor.Bindings.Bind<int>("ShowPolaroid", ShowPolaroid);
             rumor.Bindings.Bind("HidePolaroid", HidePolaroid);
             rumor.Bindings.Bind("Knocking", () => { knocking.Play(); });
+            rumor.Bindings.Bind("DoorOpen", () => { doorOpen.Play(); });
 
             StartCoroutine(rumor.Start());
 
@@ -249,6 +252,7 @@ public class Dialogue : MonoBehaviour
                 EnableChoices();
 
             choiceText[num].text = text;
+            click.Play();
         }
     }
 
@@ -291,6 +295,7 @@ public class Dialogue : MonoBehaviour
                 .AddListener(() => { 
                     Choose(temp); 
                     DisableSpecialButton(buttonParent);
+                    click.Play();
                     });
         }
         DisableSpecialButton(buttonParent);

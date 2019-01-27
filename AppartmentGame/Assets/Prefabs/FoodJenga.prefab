@@ -3075,8 +3075,14 @@ MonoBehaviour:
   untargetColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
   clickDelay: 1
   lifeVisual: {fileID: 191130854648777313}
-  crunch: []
-  disgust: []
+  crunch:
+  - {fileID: 8300000, guid: fd623c1006f3e2d4289ac23dee0670c9, type: 3}
+  - {fileID: 8300000, guid: af47e9b8df77da6408f812e340c3de76, type: 3}
+  - {fileID: 8300000, guid: a2140f3562841e440862f7b37031904d, type: 3}
+  disgust:
+  - {fileID: 8300000, guid: fbde2e11f20876143a37477e323c5b88, type: 3}
+  - {fileID: 8300000, guid: 1a07b26a2357e9b4191e409aeaf37ab6, type: 3}
+  - {fileID: 8300000, guid: 6816fa12e215e77459bef3547b34ef56, type: 3}
 --- !u!61 &1893834966675783530
 BoxCollider2D:
   m_ObjectHideFlags: 0
