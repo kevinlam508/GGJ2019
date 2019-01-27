@@ -261,5 +261,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5447632726472460214, guid: 44ca965ece4312949a7136f0df61fd5d,
+        type: 3}
+      propertyPath: rumorScript
+      value: 
+      objectReference: {fileID: 4900000, guid: 198abf4d3ec4ef444a9d1997daa8cdbd, type: 3}
+    - target: {fileID: 5447632726827221543, guid: 44ca965ece4312949a7136f0df61fd5d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44ca965ece4312949a7136f0df61fd5d, type: 3}

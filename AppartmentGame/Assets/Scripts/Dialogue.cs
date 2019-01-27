@@ -63,7 +63,7 @@ public class Dialogue : MonoBehaviour
 
     // progress tracking
     private static int NO_TRINKET = 0;
-    public int[] trinketState;
+    private int[] trinketState;
     int numTrinkets = 0;
     [SerializeField] GameObject trinkets;
 
@@ -447,8 +447,11 @@ public class Dialogue : MonoBehaviour
 
     void ShowTrinkets(){
         trinkets.SetActive(true);
+        foreach(Transform t in trinkets.transform){
+            t.gameObject.SetActive(false);
+        }
         for(int i = 0; i < trinketState.Length; ++i){
-            if(trinketState[i] > 0){
+            if(trinketState[i] != NO_TRINKET){
                 trinkets.transform.GetChild((2 * i) - 1 + trinketState[i])
                     .gameObject.SetActive(true);
             }
