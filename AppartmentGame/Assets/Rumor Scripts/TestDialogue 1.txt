@@ -35,7 +35,7 @@ say maxine "Maxine: Oh, also all the people around here are pretty friendly so y
 say maxine "Maxine: Anyways, gotta go now! Peace!"
 
 say "You: Bye!"
-
+$ DoorOpen()
 $ ClearPeople()
 
 say "You: She was really nice! I should probably go meet the other neighbors."
@@ -429,6 +429,7 @@ label lauren:
 	say "You: *knock knock*"
 	say "..."
 	say "You: Looks like nobody's home."
+	$ DoorOpen()
 	$ ShowBackgroundByName("201_open")
 	$ ShowPerson(lauren, 0, .5)
 	say lauren "???: …hello?"
