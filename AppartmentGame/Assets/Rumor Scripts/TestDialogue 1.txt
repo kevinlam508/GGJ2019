@@ -4,16 +4,25 @@ $ lilli = GetLilliVal()
 $ maxine = GetMaxineVal()
 $ sarah = GetSarahVal()
 $ charles = GetCharlesVal()
+
+$ edward_done = false
+$ lauren_done = false
+$ couple_done = false
+$ maxine_done = false
+
 $ ShowBackgroundByName("your_room_day")
 say "Enter your name"
 $ SetPlayerName()
 $ player = GetPlayerName()
 
+
+
+
 say "You: All set up! Errr, still feels kinda empty, huh. Eh, I’ll get around to buying some more furniture eventu-"
 say "You: !"
 say "You: It's unlocked!"
 
-$ ShowPerson(maxine, 0, .1)
+$ ShowPerson(maxine, 0, .8)
 say maxine "???: Howdy, neighbor! I saw you just moved in, so I wanted to stop by and introduce myself. I’m Maxine!"
 
 say "You: Oh, hey-hi-hello! Uh, I’m { player }. Nice to meet you!"
@@ -32,5 +41,52 @@ say "You: She was really nice! I should probably go meet the other neighbors."
 
 label room_day:
 	$ ShowBackgroundByName("your_room_day")
+
+label stringlights_day:
+	$ ShowBackgroundByName("stringlights_day")
+
+label room_night:
+	$ ShowBackgroundByName("your_room_night")
+
+label stringlights_night:
+	$ ShowBackgroundByName("stringlights_night")
+
+label hallway:
+	$ ShowBackgroundByName("hallway")
+	$ EnableDoors()
+	choice "door 1"
+		clear choices
+		if !maxine_done:
+			jump maxine
+		else:
+			say "You: I should try meeting somebody new today."
+			jump hallway
+	choice "door 2"
+		clear choices
+		if !couple_done:
+			jump couple
+		else:
+			say "You: I should try meeting somebody new today."
+			jump hallway
+	choice "door 3"
+		clear choices
+		if !couple_done:
+			jump couple
+		else:
+			say "You: I should try meeting somebody new today."
+			jump hallway
+
+label maxine:
+
+label couple:
+
+label edward:
+
+label lauren:
+
+
+
+
+
 
 
