@@ -5,10 +5,6 @@ $ maxine = GetMaxineVal()
 $ sarah = GetSarahVal()
 $ charles = GetCharlesVal()
 
-$ edward_done = false
-$ lauren_done = false
-$ couple_done = false
-$ maxine_done = false
 
 $ ShowBackgroundByName("your_room_day")
 say "Enter your name"
@@ -17,10 +13,12 @@ $ player = GetPlayerName()
 
 
 say "You: All set up! Errr, still feels kinda empty, huh. Eh, I’ll get around to buying some more furniture eventu-"
+say "???: *knock knock*"
 say "You: !"
 say "You: It's unlocked!"
 
 $ ShowPerson(maxine, 0, .8)
+
 say maxine "???: Howdy, neighbor! I saw you just moved in, so I wanted to stop by and introduce myself. I’m Maxine!"
 
 say "You: Oh, hey-hi-hello! Uh, I’m { player }. Nice to meet you!"
@@ -35,6 +33,8 @@ $ ClearPeople()
 
 say "You: She was really nice! I should probably go meet the other neighbors."
 
+jump hallway
+
 
 label room_day:
 	$ ShowBackgroundByName("your_room_day")
@@ -44,6 +44,7 @@ label stringlights_day:
 
 label room_night:
 	$ ShowBackgroundByName("your_room_night")
+	say "test"
 
 label stringlights_night:
 	$ ShowBackgroundByName("stringlights_night")
@@ -53,6 +54,7 @@ label hallway:
 	$ EnableDoors()
 	choice "door 1":
 		clear choices
+		$ maxine_done = IsFinished(0)
 		if !maxine_done:
 			jump maxine
 		else:
@@ -60,6 +62,7 @@ label hallway:
 			jump hallway
 	choice "door 2":
 		clear choices
+		$ couple_done = IsFinished(1)
 		if !couple_done:
 			jump couple
 		else:
@@ -67,6 +70,7 @@ label hallway:
 			jump hallway
 	choice "door 3":
 		clear choices
+		$ edward_done = IsFinished(2)
 		if !edward_done:
 			jump edward
 		else:
@@ -74,33 +78,122 @@ label hallway:
 			jump hallway
 	choice "door 4":
 		clear choices
+		$ lauren_done = IsFinished(3)
 		if !lauren_done:
 			jump lauren
 		else:
 			say "You: I should try meeting somebody new today."
 			jump hallway
-
+	choose
 
 label maxine:
-	say "maxine"
+	$ ShowBackgroundByName("207_closed")
+	say "You: *knock knock*"
+	say "You: Guess Maxine's at work. I’ll try again later."
 
-	$ maxine_done = true
+	$ DisableDialoguebox()
+	$ ShowBackgroundByName("night_transition")
+	say "dummy"
+	$ ShowBackgroundByName("207_closed")
+	$ EnableDialoguebox()
+
+	say "You: Alright, let's try this again."
+	say "You: *knock knock*"
+
+	$ ShowBackgroundByName("207_open")
+	$ ShowPerson(maxine, 0, .5)
+
+	say maxine "Maxine: Hey { player }! What brings you over?"
+
+	choice "Wanna do something?":
+		clear choices
+		say maxine "Maxine: I was just going to stay home tonight and cook, but I’m down."
+
+	choice "Let’s hang out!":
+		clear choices
+		say maxine "Maxine: Well how can I say no to that kind of energy?"
+	choose
+
+	say maxine "Maxine: Do you have anything in mind or-"
+	say maxine "Maxine: WAIT! HAVE YOU BEEN TO SNURGLARS YET?!"
+
+	choice "COME AGAIN?!":
+		clear choices
+		say "You: WHAT THE HELL IS A SNURGLARS?"
+		say maxine "Maxine: It’s this really good late night food joint!"
+
+	choice "That’s fake.":
+		clear choices
+		say maxine "Maxine: I swear it’s real!"
+	choose
+
+	say maxine "Maxine: Their food is really good. But also trash? But in the best way!"
+	say maxine "Maxine: Kinda like me."
+	say maxine "Maxine: Uh, so are you down?"
+	say "You: I guess!"
+
+	$ ClearPeople()
+	$ ShowBackgroundByName("snurglars_register")
+	$ ShowPerson(maxine, 0, .2)
+
+	say maxine "Are you ready to snurgle down some food?"
+	say "You: Is that a real expression people use here?"
+	say maxine "Maxine: Sure!"
+	say "You: I’ll take your word for it."
+	say "You: ..."
+	say "You: This menu is so overwhelminggggg"
+	say "You: Like, what even are loaded chicken tendies?! What are they loaded with? I have so many questions!"
+	say maxine "Maxine: Just roll with it!"
+
+
+	$ GetTrinket(0, 1)
 	jump room_night
 
 label couple:
-	say "couple"
+	$ ShowBackgroundByName("205_closed")
+	say "You: *knock knock*"
+	$ ShowBackgroundByName("205_open")
+	$ ShowPerson(lilli, 0, .5)
 
-	$ couple_done = true
+	say lilli "???: Oh hey! You just moved in, right?"
+	say "You: Yeah, just wanted to drop by and say hi. I’m { player }."
+	say lilli "???: Nice to meet you! I’m Lilli and uh, one second…"
+	say "Lilli: Babe, come say hello to our new neighbor!"
+	$ ClearPeople()
+	$ ShowPerson(lilli, 0, .2)
+	$ ShowPerson(sarah, 0, .8)
+	say sarah "???: Sorry, was busy getting ready. I'm Sarah!"
+	say "You: { player }."
+	say sarah "Sarah: Lilli and I are heading over to an arcade downtown if you want to join us."
+
+	choice "I don't want to impose...":
+		clear choices
+		say lilli "Lilli: Oh, it wouldn’t be like that at all! The more the merrier!"
+
+	choice "HELL YEAH, I LOVE ARCADES!":
+		clear choices
+		say lilli "Lilli: Let's head out then!"
+	choose
+
+	$ ShowBackgroundByName("arcade")
+	$ ClearPeople()
+
+	say "You: There's so many games!"
+	say sarah "Sarah: Yeah, it’s the only arcade like this around here."
+
+	$ GetTrinket(1, 1)
 	jump room_night
 
 label edward:
-	say "edward"
-	$ edward_done = true
+	$ ShowBackgroundByName("203_closed")
+
+	$ GetTrinket(2, 1)
 	jump room_night
 
 label lauren:
-	say "lauren"
-	$ lauren_done = true
+	$ ShowBackgroundByName("201_closed")
+
+	$ GetTrinket(3, 1)
 	jump room_night
 
 
