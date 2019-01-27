@@ -4959,7 +4959,7 @@ PrefabInstance:
     - target: {fileID: 6397087637069929900, guid: 42f832246cec34946a0420a274b85d7c,
         type: 3}
       propertyPath: music.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6397087637069929900, guid: 42f832246cec34946a0420a274b85d7c,
         type: 3}
@@ -4971,6 +4971,11 @@ PrefabInstance:
       propertyPath: music.Array.data[7]
       value: 
       objectReference: {fileID: 8300000, guid: 93335bf0b5502144b8c008d7eaddaa09, type: 3}
+    - target: {fileID: 6397087637069929900, guid: 42f832246cec34946a0420a274b85d7c,
+        type: 3}
+      propertyPath: music.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: e75945b5d0a545e4aa1c44498eb4ff5b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42f832246cec34946a0420a274b85d7c, type: 3}
 --- !u!4 &545653105581552678 stripped
