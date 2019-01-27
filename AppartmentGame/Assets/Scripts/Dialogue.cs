@@ -63,7 +63,7 @@ public class Dialogue : MonoBehaviour
 
     // progress tracking
     private static int NO_TRINKET = 0;
-    private int[] trinketState;
+    public int[] trinketState;
     int numTrinkets = 0;
     [SerializeField] GameObject trinkets;
 
@@ -311,7 +311,7 @@ public class Dialogue : MonoBehaviour
 #endif
 
         peopleModels[(int)flagToPerson[person]].ShowSprite(sprite);
-        peopleModels[(int)flagToPerson[person]].SetPosition(relPos * screenWidth);
+        peopleModels[(int)flagToPerson[person]].SetPosition((relPos - .5f) * screenWidth);
     }
 
     void HidePerson(int person){

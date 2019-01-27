@@ -3,70 +3,54 @@ $ lauren = GetLaurenVal()
 $ lilli = GetLilliVal()
 $ maxine = GetMaxineVal()
 $ sarah = GetSarahVal()
-$ ShowBackground(1)
-$ ShowPerson(edward, 0, .1)
-$ ShowPerson(lauren, 0, .5)
-$ ShowPerson(lilli, 0, .9)
+
+$ ShowBackgroundByName("hallway")
 say "Enter your name"
 $ SetPlayerName()
 $ player = GetPlayerName()
-say "{ player } is the name"
-say edward "edward"
-say edward + lilli "edward and lilli"
-say lauren "laruen"
-say lilli "lilli"
-say lauren "laruen"
-say "moo"
-say edward "edward"
-say edward "edward"
-say "cow"
-say edward "edward"
-say lauren "laruen"
-say lilli "lilli"
-say edward "edward"
-$ ClearPeople()
-$ ShowPerson(maxine, 0, .5)
-say maxine "yay"
-$ ShowPerson(maxine, 0, .3)
-say maxine "yay"
-$ ShowPerson(maxine, 0, .2)
-say maxine "yay"
-say "chicken"
-say "cluck"
-choice "bef":
+
+$ ShowPerson(maxine, 0, .8)
+say "maxine"
+$ ShowPerson(lauren, 0, .7)
+say "lauren"
+$ ShowPerson(lilli, 0, .6)
+say "lilli"
+$ ShowPerson(edward, 0, .5)
+say "edward"
+$ ShowPerson(sarah, 0, .1)
+say "sarah"
+
+choice "nugnugnugnug":
 	clear choices
-	say "bef"
-choice "chicn":
+	say "nugnugnugnug"
+choice "tend":
 	clear choices
-	say "chicn"
-	choice "chicn nugger":
-		clear choices
-		say "chicn nugger"
-	choice "chiglenugly":
-		clear choices
-		say "chiglenugly"
-	choose
+	say "tend"
 choose
 
-$ EnableDoors()
-choice "door 1":
-	clear choices
-	say "door 1"
-choice "door 2":
-	clear choices
-	say "door 2"
-choice "door 3":
-	clear choices
-	say "door 3"
-choice "door 4":
-	clear choices
-	say "door 4"
-choose
-
-$ ShowBackground(1)
-say "hall"
-say "minigame start"
-$ StartingMinigame()
-pause 0
-say "minigame end"
-say "peck"
+$ ShowBackgroundByName("your_room_day")
+say "a"
+$ ShowBackgroundByName("your_room_day")
+say "b"
+$ ShowBackgroundByName("hallway")
+say "c"
+$ ShowBackgroundByName("your_room_day")
+say "d"
+$ ShowBackgroundByName("your_room_day")
+say "e"
+$ ShowBackgroundByName("hallway")
+say "f"
+$ ShowBackgroundByName("your_room_day")
+say "g"
+$ ShowBackgroundByName("your_room_day")
+say "h"
+$ ShowBackgroundByName("your_room_day")
+say "i"
+$ ShowBackgroundByName("hallway")
+say "j"
+$ ShowBackgroundByName("your_room_day")
+say "k"
+$ ShowBackgroundByName("your_room_day")
+say "l"
+$ ShowBackgroundByName("your_room_day")
+say "m"
