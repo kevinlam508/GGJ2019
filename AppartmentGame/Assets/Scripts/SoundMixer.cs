@@ -10,8 +10,8 @@ public enum AudioTracks {
 	HOME4,
 	FOOD_JENGA,
 	ALIEN_GO_HOME,
-	MUSEUM,
-	PLANTS
+	PLANTS,
+	MUSEUM
 }
 
 public class SoundMixer : MonoBehaviour

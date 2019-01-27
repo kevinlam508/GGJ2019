@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1019407138}
   - component: {fileID: 1019407137}
   - component: {fileID: 1019407139}
+  - component: {fileID: 1019407140}
   m_Layer: 5
   m_Name: Polaroid
   m_TagString: Untagged
@@ -93,6 +94,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 091db9516b4d383438abc0041cd949a6, type: 3}
   - {fileID: 21300000, guid: 2e4bcc17e86743841a3ba0bb44234f04, type: 3}
   fadedColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &1019407140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019407135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e222259b430a4c45838984a03aea088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2647282397660965367
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,7 +937,7 @@ MonoBehaviour:
   nameField: {fileID: 5447632727118831371}
   textBox: {fileID: 5447632726186029720}
   dialogueBox: {fileID: 5447632726197749746}
-  rumorScript: {fileID: 4900000, guid: 198abf4d3ec4ef444a9d1997daa8cdbd, type: 3}
+  rumorScript: {fileID: 4900000, guid: 5494201195dafb8478358efef72387b4, type: 3}
   peopleModels:
   - {fileID: 5447632726814524866}
   - {fileID: 5447632726772015951}
@@ -3913,6 +3926,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 90e29e93199798349b8d16dcf534cf5c, type: 3}
   - {fileID: 21300000, guid: a9d0e755a4b98c34e8cd13b1367512bd, type: 3}
   - {fileID: 21300000, guid: 0a05a3a2f959f6746b91f3a814d63072, type: 3}
+  - {fileID: 21300000, guid: 8b4f01f2790d52e4fadc47f4a1df64dd, type: 3}
+  - {fileID: 21300000, guid: 697253a00073ed34784d6f82413603ec, type: 3}
   fadedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &6745021812330368399
 GameObject:
@@ -4217,9 +4232,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6397087637069929900, guid: 42f832246cec34946a0420a274b85d7c,
         type: 3}
+      propertyPath: music.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397087637069929900, guid: 42f832246cec34946a0420a274b85d7c,
+        type: 3}
       propertyPath: fadeSpeed
       value: 0.35
       objectReference: {fileID: 0}
+    - target: {fileID: 6397087637069929900, guid: 42f832246cec34946a0420a274b85d7c,
+        type: 3}
+      propertyPath: music.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 93335bf0b5502144b8c008d7eaddaa09, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42f832246cec34946a0420a274b85d7c, type: 3}
 --- !u!4 &545653105581552678 stripped
