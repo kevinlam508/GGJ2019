@@ -4654,6 +4654,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0a05a3a2f959f6746b91f3a814d63072, type: 3}
   - {fileID: 21300000, guid: 8b4f01f2790d52e4fadc47f4a1df64dd, type: 3}
   - {fileID: 21300000, guid: 697253a00073ed34784d6f82413603ec, type: 3}
+  - {fileID: 21300000, guid: 43f5b4005ad3fdc489466a5e3b38ed47, type: 3}
   fadedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &6745021812330368399
 GameObject:
