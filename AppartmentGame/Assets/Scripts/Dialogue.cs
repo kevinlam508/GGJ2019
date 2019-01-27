@@ -84,6 +84,8 @@ public class Dialogue : MonoBehaviour
     [SerializeField] AudioSource timer;
     [SerializeField] AudioSource cameraFlash;
 
+    [SerializeField] PolaroidFlash flashEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -508,6 +510,7 @@ public class Dialogue : MonoBehaviour
 
     void ShowPolaroid(int idx){
         polaroid.ShowSprite(idx);
+        flashEffect.Flash();
     }
     void HidePolaroid(){
         polaroid.HideSprite();
