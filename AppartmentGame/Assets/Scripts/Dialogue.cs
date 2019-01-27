@@ -25,7 +25,8 @@ public enum Background {
     ARCADE, 
     MUSEUM, 
     EDWARD_ROOM,
-    NIGHT_TRANSITION};
+    NIGHT_TRANSITION
+};
 
 public class Dialogue : MonoBehaviour
 {
@@ -60,9 +61,16 @@ public class Dialogue : MonoBehaviour
     [SerializeField] GameObject doors;
     [SerializeField] GameObject menu;
 
+    // progress tracking
+    private static int NO_TRINKET = 0;
+    private int[] trinketState;
+    int numTrinkets = 0;
+
     // Start is called before the first frame update
     void Start()
     {
+        trinketState = new int[4];
+
         screenWidth = ((RectTransform)textBox.gameObject
             .GetComponent<Transform>().parent
             .parent).rect.width;
@@ -124,7 +132,8 @@ public class Dialogue : MonoBehaviour
             rumor.Bindings.Bind<int>("FadePerson", FadePerson);
             rumor.Bindings.Bind("ClearPeople", ClearPeople);
 
-            rumor.Bindings.Bind("EnsableDialoguebox", EnsableDialoguebox);
+            // buttons
+            rumor.Bindings.Bind("EnableDialoguebox", EnableDialoguebox);
             rumor.Bindings.Bind("DisableDialoguebox", DisableDialoguebox);
             rumor.Bindings.Bind("EnableDoors", 
                 () => { EnableSpecialButtons(doors); });
@@ -132,6 +141,10 @@ public class Dialogue : MonoBehaviour
                 () => { EnableSpecialButtons(menu); });
             rumor.Bindings.Bind("GetPlayerName", GetPlayerName);
             rumor.Bindings.Bind("SetPlayerName", SetPlayerName);
+
+            // trinkets
+            rumor.Bindings.Bind<int, bool>("IsFinished", IsFinished);
+            rumor.Bindings.Bind<int, int>("GetTrinket", GetTrinket);
 
             StartCoroutine(rumor.Start());
 
@@ -404,6 +417,15 @@ public class Dialogue : MonoBehaviour
                 ShowBackground(Background.NIGHT_TRANSITION);
                 break;
         }
+    }
+
+    bool IsFinished(int doorNum){
+        return trinketState[doorNum] != NO_TRINKET;
+    }
+
+    void GetTrinket(int doorNum, int trinket){
+        trinketState[doorNum] = trinket;
+        numTrinkets++;
     }
 
     void ShowBackground(Background background){
