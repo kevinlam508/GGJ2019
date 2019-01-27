@@ -290,7 +290,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprites:
   - {fileID: 21300000, guid: e8faf2ef9c03da245af725faadfbe79c, type: 3}
+  - {fileID: 21300000, guid: a018409ce67114e42b33414e6e3037f3, type: 3}
+  - {fileID: 21300000, guid: a5d5f1c9a8780f3418b0d241f7617a94, type: 3}
+  - {fileID: 21300000, guid: cc358af78b48b6a439df5db42f9b6cd0, type: 3}
   - {fileID: 21300000, guid: e491a9f6df936aa4c86533eab08d66a9, type: 3}
+  - {fileID: 21300000, guid: 06f778e0a1ee9ee4c9b49517133e77fa, type: 3}
+  - {fileID: 21300000, guid: 062717213baeb8f4bbca66ca8dd6944b, type: 3}
+  - {fileID: 21300000, guid: 2431a015e7ca29941939ebd5748f77de, type: 3}
+  - {fileID: 21300000, guid: 29ebc0a69b76a534e86d33a46b0472bc, type: 3}
+  - {fileID: 21300000, guid: e0583f7e5d2ab2b4a9bb18c190fbe997, type: 3}
+  - {fileID: 21300000, guid: ef51bcdfbb235e74ebed62c47a6aad78, type: 3}
+  - {fileID: 21300000, guid: daa4a52f8745c5044bdf609a703413aa, type: 3}
+  - {fileID: 21300000, guid: 3e1aa96b4a835864cbe50eb6348f8497, type: 3}
+  - {fileID: 21300000, guid: 4205ea8964d924b4e9bd32366b60d476, type: 3}
+  - {fileID: 21300000, guid: 30ddb08fbd82c014b8baf9fbf884fea4, type: 3}
+  - {fileID: 21300000, guid: d619a9fb5958b04478e71cbaf42292f0, type: 3}
+  - {fileID: 21300000, guid: 90e29e93199798349b8d16dcf534cf5c, type: 3}
+  - {fileID: 21300000, guid: a9d0e755a4b98c34e8cd13b1367512bd, type: 3}
+  - {fileID: 21300000, guid: 0a05a3a2f959f6746b91f3a814d63072, type: 3}
   fadedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &221412119
 MonoBehaviour:
@@ -1453,7 +1470,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 2.3, y: 67.3}
+  m_AnchoredPosition: {x: 2.2999878, y: 67.3}
   m_SizeDelta: {x: -59.8, y: 40.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1283328107

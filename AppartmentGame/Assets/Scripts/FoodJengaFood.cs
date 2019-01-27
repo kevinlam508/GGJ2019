@@ -6,11 +6,11 @@ public class FoodJengaFood : MonoBehaviour
 {
 
 	[HideInInspector] public int foodIdx;
-	private SpriteRenderer renderer;
+	private SpriteRenderer rend;
 	private bool clickable = true;
 
 	void Awake(){
-		renderer = GetComponent<SpriteRenderer>();
+		rend = GetComponent<SpriteRenderer>();
 	}
 
 	public bool Clickable{
@@ -27,6 +27,6 @@ public class FoodJengaFood : MonoBehaviour
     }
 
     public void ChangeColor(Color color){
-    	renderer.color = color;
+    	rend.color = color;
     }
 }

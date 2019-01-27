@@ -6,6 +6,26 @@ using UnityEngine.UI;
 using Exodrifter.Rumor.Engine;
 
 public enum People { EDWARD, LAUREN, MAXINE, LILLI, SARAH, CHARLES, PLAYER };
+public enum Background {
+    YOUR_ROOM_DAY,
+    YOUR_ROOM_NIGHT,
+    STRINGLIGHTS_DAY,
+    STRINGLIGHTS_NIGHT,
+    HALLWAY,
+    ROOM_201_CLOSED, 
+    ROOM_201_OPEN, 
+    ROOM_203_CLOSED, 
+    ROOM_203_OPEN, 
+    ROOM_205_CLOSED, 
+    ROOM_205_OPEN, 
+    ROOM_207_CLOSED, 
+    ROOM_207_OPEN, 
+    SNURGLARS_REGISTER, 
+    SNURGLARS_TABLE, 
+    ARCADE, 
+    MUSEUM, 
+    EDWARD_ROOM,
+    NIGHT_TRANSITION};
 
 public class Dialogue : MonoBehaviour
 {
@@ -96,7 +116,6 @@ public class Dialogue : MonoBehaviour
             rumor.Bindings.Bind("StartingMinigame", StartingMinigame);
             rumor.Bindings.Bind<int, int, float>("ShowPerson", ShowPerson);
             rumor.Bindings.Bind<int>("HidePerson", HidePerson);
-            rumor.Bindings.Bind<int>("ShowBackground", ShowBackground);
             rumor.Bindings.Bind<string>("ShowBackgroundByName",
                 ShowBackgroundByName);
             rumor.Bindings.Bind<int>("UnfadePerson", UnfadePerson);
@@ -321,10 +340,69 @@ public class Dialogue : MonoBehaviour
 
     void ShowBackgroundByName(string name){
         Debug.Log(name);
+        switch(name){
+            case "your_room_day":
+                ShowBackground(Background.YOUR_ROOM_DAY);
+                break;
+            case "your_room_night":
+                ShowBackground(Background.YOUR_ROOM_NIGHT);
+                break;
+            case "stringlights_day":
+                ShowBackground(Background.STRINGLIGHTS_DAY);
+                break;
+            case "stringlights_night":
+                ShowBackground(Background.STRINGLIGHTS_NIGHT);
+                break;
+            case "hallway":
+                ShowBackground(Background.HALLWAY);
+                break;
+            case "201_closed":
+                ShowBackground(Background.ROOM_201_CLOSED);
+                break;
+            case "201_open":
+                ShowBackground(Background.ROOM_201_OPEN);
+                break;
+            case "203_closed":
+                ShowBackground(Background.ROOM_203_CLOSED);
+                break;
+            case "203_open":
+                ShowBackground(Background.ROOM_203_OPEN);
+                break;
+            case "205_closed":
+                ShowBackground(Background.ROOM_205_CLOSED);
+                break;
+            case "205_open":
+                ShowBackground(Background.ROOM_205_OPEN);
+                break;
+            case "207_closed":
+                ShowBackground(Background.ROOM_207_CLOSED);
+                break;
+            case "207_open":
+                ShowBackground(Background.ROOM_207_OPEN);
+                break;
+            case "snurglars_register":
+                ShowBackground(Background.SNURGLARS_REGISTER);
+                break;
+            case "snurglars_table":
+                ShowBackground(Background.SNURGLARS_TABLE);
+                break;
+            case "arcade":
+                ShowBackground(Background.ARCADE);
+                break;
+            case "museum":
+                ShowBackground(Background.MUSEUM);
+                break;
+            case "edward_room":
+                ShowBackground(Background.EDWARD_ROOM);
+                break;
+            case "night_transition":
+                ShowBackground(Background.NIGHT_TRANSITION);
+                break;
+        }
     }
 
-    void ShowBackground(int background){
-        backgrounds.ShowSprite(background);     
+    void ShowBackground(Background background){
+        backgrounds.ShowSprite((int)background);     
     }
 
     void ClearPeople(){
