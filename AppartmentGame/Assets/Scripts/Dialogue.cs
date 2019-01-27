@@ -484,7 +484,7 @@ public class Dialogue : MonoBehaviour
             case "arcade_game":
                 ShowBackground(Background.ARCADE_GAME);
                 break;
-            case "title_card"
+            case "title_card":
                 ShowBackground(Background.TITLE);
                 break;
         }
