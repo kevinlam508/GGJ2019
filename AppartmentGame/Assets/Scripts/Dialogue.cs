@@ -67,6 +67,9 @@ public class Dialogue : MonoBehaviour
     int numTrinkets = 0;
     [SerializeField] GameObject trinkets;
 
+    // minigames
+    [SerializeField] GameObject foodJenga;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -100,6 +103,7 @@ public class Dialogue : MonoBehaviour
         // set up menu
         SetUpSpecialButtons(menu);
 
+
 #if UNITY_EDITOR
         if(rumorScript != null){
 #endif
@@ -123,7 +127,10 @@ public class Dialogue : MonoBehaviour
             rumor.Bindings.Bind("GetSarahVal", GetSarahVal);
             rumor.Bindings.Bind("GetCharlesVal", GetCharlesVal);
 
+            // minigame
             rumor.Bindings.Bind("StartingMinigame", StartingMinigame);
+            rumor.Bindings.Bind("StartFoodJenga", StartFoodJenga);
+            rumor.Bindings.Bind("IsWinMinigame", IsWinMinigame);
 
             rumor.Bindings.Bind<int, int, float>("ShowPerson", ShowPerson);
             rumor.Bindings.Bind<int>("HidePerson", HidePerson);
@@ -149,12 +156,16 @@ public class Dialogue : MonoBehaviour
 
             StartCoroutine(rumor.Start());
 
+
 #if UNITY_EDITOR
         }
         else {
             DialogueError("No rumor script on " + gameObject + "'s component");
         }
 #endif
+        // set up food jenga
+        foodJenga.GetComponent<FoodJengaManager>().OnEnd += EnableDialoguebox;
+        foodJenga.GetComponent<FoodJengaManager>().OnEnd += rumor.Advance;
     }
 
     void InitPeopleDictionary(){
@@ -298,9 +309,20 @@ public class Dialogue : MonoBehaviour
         nameField.gameObject.SetActive(false);
     }
 
-
+    // minigames
     void StartingMinigame(){
         GameState.state = State.MINIGAME;
+    }
+
+    void StartFoodJenga(){
+        GameState.state = State.MINIGAME;
+        foodJenga.SetActive(true);
+        DisableDialoguebox();
+        DisableBackground();
+    }
+
+    bool IsWinMinigame(){
+        return GameState.res == MinigameResult.WIN;
     }
 
     void ShowPerson(int person, int sprite, float relPos){
@@ -433,7 +455,15 @@ public class Dialogue : MonoBehaviour
     }
 
     void ShowBackground(Background background){
+        EnableBackground();
         backgrounds.ShowSprite((int)background);     
+    }
+
+    void DisableBackground(){
+        backgrounds.gameObject.SetActive(false);
+    }
+    void EnableBackground(){
+        backgrounds.gameObject.SetActive(true);
     }
 
     void ClearPeople(){

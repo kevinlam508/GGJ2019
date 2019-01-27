@@ -4,53 +4,263 @@ $ lilli = GetLilliVal()
 $ maxine = GetMaxineVal()
 $ sarah = GetSarahVal()
 
-$ ShowBackgroundByName("hallway")
-say "Enter your name"
-$ SetPlayerName()
-$ player = GetPlayerName()
+say "hi"
+$ StartFoodJenga()
+pause 0
+if IsWinMinigame():
+	say "win"
+	say "1"
+	say "2"
+	say "3"
+else:
+	say "lose"
+	say "1"
+	say "2"
+	say "3"
+	say "1"
+	say "2"
+	say "3"
 
-$ ShowPerson(maxine, 0, .8)
-say "maxine"
-$ ShowPerson(lauren, 0, .7)
-say "lauren"
-$ ShowPerson(lilli, 0, .6)
-say "lilli"
-$ ShowPerson(edward, 0, .5)
-say "edward"
-$ ShowPerson(sarah, 0, .1)
-say "sarah"
+	say "1"
+	say "2"
+	say "3"
 
-choice "nugnugnugnug":
-	clear choices
-	say "nugnugnugnug"
-choice "tend":
-	clear choices
-	say "tend"
-choose
+	say "1"
+	say "2"
+	say "3"
 
-$ ShowBackgroundByName("your_room_day")
-say "a"
-$ ShowBackgroundByName("your_room_day")
-say "b"
-$ ShowBackgroundByName("hallway")
-say "c"
-$ ShowBackgroundByName("your_room_day")
-say "d"
-$ ShowBackgroundByName("your_room_day")
-say "e"
-$ ShowBackgroundByName("hallway")
-say "f"
-$ ShowBackgroundByName("your_room_day")
-say "g"
-$ ShowBackgroundByName("your_room_day")
-say "h"
-$ ShowBackgroundByName("your_room_day")
-say "i"
-$ ShowBackgroundByName("hallway")
-say "j"
-$ ShowBackgroundByName("your_room_day")
-say "k"
-$ ShowBackgroundByName("your_room_day")
-say "l"
-$ ShowBackgroundByName("your_room_day")
-say "m"
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"
+
+	say "1"
+	say "2"
+	say "3"

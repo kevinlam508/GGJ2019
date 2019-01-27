@@ -181,6 +181,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7878474231833576485}
   - component: {fileID: 7878474231833576491}
+  - component: {fileID: 6285162590830814174}
+  - component: {fileID: 7878474231833576492}
   m_Layer: 0
   m_Name: FoodJenga
   m_TagString: Untagged
@@ -216,8 +218,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d311a8d0817624f48b57b4c11ad8c7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  untargetColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+  untargetColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
   clickDelay: 1
+--- !u!61 &6285162590830814174
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7878474231833576490}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 10.157235, y: -5.3774405}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 8.842028, y: 0.9651146}
+  m_EdgeRadius: 0
+--- !u!61 &7878474231833576492
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7878474231833576490}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -8.316722, y: -5.501567}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 8.405304, y: 0.8587208}
+  m_EdgeRadius: 0
 --- !u!1001 &2909913677673766251
 PrefabInstance:
   m_ObjectHideFlags: 0

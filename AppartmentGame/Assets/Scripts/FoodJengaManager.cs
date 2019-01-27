@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,10 @@ public class FoodJengaManager : MonoBehaviour
 	private int[] eatenCount;
     HashSet<int> finishedIdx;
 
+    [SerializeField] SpriteSwitcher2 lifeVisual;
+
+    public event Action OnEnd;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,24 +35,32 @@ public class FoodJengaManager : MonoBehaviour
         eatenCount = new int[foods.transform.childCount];
         finishedIdx = new HashSet<int>();
         RandomTarget();
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(lives == 0){
-        	GameState.state = State.DIALOGUE;
-        	GameState.res = MinigameResult.LOSE;
-        	DisableClick();
-        }
-        else if(foods.transform.childCount == finishedIdx.Count){
-        	GameState.state = State.DIALOGUE;
-        	GameState.res = MinigameResult.WIN;
-        	DisableClick();
-        }
+    	if(GameState.state == State.MINIGAME){
+	    	lifeVisual.ShowSprite(Mathf.Max(lives, 0));
+	        if(lives == 0){
+	        	GameState.state = State.DIALOGUE;
+	        	GameState.res = MinigameResult.LOSE;
+	        	DisableClick();
+	        	OnEnd();
+	        }
+	        else if(foods.transform.childCount == finishedIdx.Count){
+	        	GameState.state = State.DIALOGUE;
+	        	GameState.res = MinigameResult.WIN;
+	        	DisableClick();
+	        	OnEnd();
+	        }
+    	}
     }
 
     public void Eaten(int foodIdx){
+    	if(foodIdx != targetIdx)
+    		lives--;
     	EatFood(foodIdx);
     	RandomTarget();
     	StartCoroutine(DisableClicking());
@@ -88,13 +101,13 @@ public class FoodJengaManager : MonoBehaviour
 
     void RandomTarget(){
     	// deletes food groups that are empty while picking next target
-    	targetIdx = Random.Range(0, foods.transform.childCount);
+    	targetIdx = UnityEngine.Random.Range(0, foods.transform.childCount);
     	while(foods.transform.childCount != finishedIdx.Count && 
     		foods.transform.GetChild(targetIdx).childCount == 
     		eatenCount[targetIdx]){
 
     		finishedIdx.Add(targetIdx);
-    		targetIdx = Random.Range(0, foods.transform.childCount);
+    		targetIdx = UnityEngine.Random.Range(0, foods.transform.childCount);
     	}
 
     	if(foods.transform.childCount != finishedIdx.Count){
