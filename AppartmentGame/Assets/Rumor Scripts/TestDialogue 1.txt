@@ -4,6 +4,7 @@ $ lilli = GetLilliVal()
 $ maxine = GetMaxineVal()
 $ sarah = GetSarahVal()
 $ charles = GetCharlesVal()
+$ friends = 0
 
 
 $ ShowBackgroundByName("your_room_day")
@@ -13,9 +14,11 @@ $ player = GetPlayerName()
 
 
 say "You: All set up! Errr, still feels kinda empty, huh. Eh, I’ll get around to buying some more furniture eventu-"
+$ Knocking()
 say "???: *knock knock*"
 say "You: !"
 say "You: It's unlocked!"
+$ DoorOpen()
 
 $ ShowPerson(maxine, 0, .8)
 
@@ -39,16 +42,11 @@ jump hallway
 
 label room_day:
 	$ ShowBackgroundByName("your_room_day")
-
-label stringlights_day:
-	$ ShowBackgroundByName("stringlights_day")
-
-label room_night:
-	$ ShowBackgroundByName("your_room_night")
-	say "test"
-
-label stringlights_night:
-	$ ShowBackgroundByName("stringlights_night")
+	$ SwitchToTrack( friends )
+	$ EnableBedroom()
+	choice "the one":
+		jump hallway
+	choose
 
 label hallway:
 	$ ShowBackgroundByName("hallway")
@@ -89,6 +87,7 @@ label hallway:
 
 label maxine:
 	$ ShowBackgroundByName("207_closed")
+	$ Knocking()
 	say "You: *knock knock*"
 	say "You: Guess Maxine's at work. I’ll try again later."
 
@@ -99,9 +98,11 @@ label maxine:
 	$ EnableDialoguebox()
 
 	say "You: Alright, let's try this again."
+	$ Knocking()
 	say "You: *knock knock*"
 
 	$ ShowBackgroundByName("207_open")
+	$ DoorOpen()
 	$ ShowPerson(maxine, 0, .5)
 
 	say maxine "Maxine: Hey { player }! What brings you over?"
@@ -177,9 +178,10 @@ label maxine:
 	say "You: uhhhhhhhhhhhhhh"
 
 	$ ClearPeople()
+	$ SwitchToTrack(5)
 	$ StartFoodJenga()
 	pause 0
-
+	$ SwitchToTrack(friends)
 	$ ShowBackgroundByName("snurglars_table")
 	$ ShowPerson(maxine, 0, .5)
 
@@ -187,7 +189,8 @@ label maxine:
 		$ GetTrinket(0, 1)
 		say "You: Oh god."
 		say "You: …I think food might be ruined for me now"
-		say maxine "Maxine: I never want to eat again... but bobbleheads!"
+		say maxine "Maxine: I never want to eat again... "
+		say maxine "Maxine: But we have bobbleheads!"
 		say "You: Bobbleheads!"
 
 	else:
@@ -197,17 +200,20 @@ label maxine:
 		say "You: I'm keeping this god-awful cup."
 
 	$ ClearPeople()
+	$ ShowBackgroundByName("black_background")
 	$ DisableDialoguebox()
-	$ ShowBackgroundByName("Black_Background")
 	$ ShowPolaroid(0)
 	say "dummy"
 	$ HidePolaroid()
 	$ EnableDialoguebox()
+	$ friends += 1
 	jump room_day
 
 label couple:
 	$ ShowBackgroundByName("205_closed")
+	$ Knocking()
 	say "You: *knock knock*"
+	$ DoorOpen()
 	$ ShowBackgroundByName("205_open")
 	$ ShowPerson(lilli, 0, .5)
 
@@ -235,6 +241,7 @@ label couple:
 
 	$ ShowBackgroundByName("arcade")
 	$ ClearPeople()
+	$ SwitchToTrack(6)
 
 	say "You: There's so many games!"
 	$ ShowPerson(sarah, 0, .8)
@@ -242,6 +249,93 @@ label couple:
 
 	say sarah "Sarah: Yeah, it’s the only arcade like this around here."
 	say "You: Neat!"
+
+	$ skeez = false
+	$ dance = false
+	$ counter = false
+	$ galala = false
+
+	label arcade:
+		if skeez and dance and counter and galala:
+			jump home_planet
+		
+		$ EnableArcade()
+
+		choice "skeezball":
+			clear choices
+			if skeez:
+				say "You: I should look at some other stuff."
+			else:
+				$ ShowPerson(sarah, 0, .5)
+				say sarah "Sarah: I got a tooth knocked out by one of those balls when I was little."
+				say "You: Holy shit, how does that even happen?"
+				say sarah "Sarah: *shrug* Kids are violent."
+				$ ClearPeople()
+				$ skeez = true
+
+		choice "dance":
+			clear choices
+			if dance:
+				say "You: I should look at some other stuff."
+			else:
+				$ ShowPerson(sarah, 0, .5)
+				say sarah "Sarah: Y'all down for some dancing?!"
+				say "You: Oh god, I’m pretty out of practice and I’d probably look really awkward."
+				say sarah "Sarah: If any of the gamerbros here try talking shit, I’ll make sure to beat them up for you."
+				say "You: I appreciate that."
+				$ ClearPeople()
+				$ dance = true
+
+		choice "counter":
+			clear choices
+			if counter:
+				say "You: I should look at some other stuff."
+			else:
+				say "You: !!!"
+				$ ShowPerson(lilli, 0, .2)
+				$ ShowPerson(sarah, 0, .8)
+				say lilli+sarah "Lilli and Sarah: ???"
+				say "You: I had a bunny like that when I was little, but my mom threw him out!"
+				say lilli "Lilli: Well now’s your chance to get a new one."
+				say "You: I’m going to make it happen! I’m not leaving without adopting a Sir Snugglestuff Jr."
+				say sarah "Sarah: Alright, but they close in two hours."
+				$ ClearPeople()
+				$ counter = true
+
+		choice "galal":
+			clear choices
+			if galal:
+				say "You: I should look at some other stuff."
+			else:
+				$ ShowPerson(lilli, 0, .2)
+				say lilli "Lilli: Galalalala"
+				$ ShowPerson(sarah, 0, .8)
+				say sarah "Sarah: Galalala-lalala"
+				say "You: Galalalalalalalalalalalalalalalalalalalalala"
+				say "You: Sorry, that was obnoxious."
+				$ ClearPeople()
+				$ galal = true
+		choose
+
+	jump arcade
+
+label home_planet:
+	say "You: Alright, how to I maximize the amount of tickets I win per token."
+	$ ShowPerson(sarah, 0, .5)
+	say sarah "Sarah: Uhhh, I think the Home Planet machine gives a lot of tickets?"
+	say "You: Let’s goooo then!"
+
+	$ ClearPeople()
+	$ ShowBackgroundByName("arcade_game")
+	$ DisableDialoguebox()
+	say "dummy"
+	$ EnableDialoguebox()
+	$ ShowBackgroundByName("arcade")
+
+	say "You: YOOOOOOOOOOOOOOOOO!"
+	$ ShowPerson(lilli, 0, .5)
+	say lilli "Lilli: You did it!"
+	say "You: LET'S GO GET SIR SNUGGLESTUFF JR!"
 
 	$ GetTrinket(1, 1)
 	$ ClearPeople()
@@ -251,12 +345,15 @@ label couple:
 	say "dummy"
 	$ HidePolaroid()
 	$ EnableDialoguebox()
+	$ friends += 1
 	jump room_day
 
 
 label edward:
 	$ ShowBackgroundByName("203_closed")
+	$ Knocking()
 	say "You: *knock knock*"
+	$ DoorOpen()
 	$ ShowBackgroundByName("203_open")
 	$ ShowPerson(edward, 0, .5)
 	say edward "???: Hello?"
@@ -273,6 +370,7 @@ label edward:
 	$ ShowBackgroundByName("edward_room")
 	$ ClearPeople()
 	$ ShowPerson(edward, 0, .2)
+	$ SwitchToTrack(7)
 
 	say edward "Edward: Make yourself at home. The lasagna should be done soon."
 	say "You: There’s so many plants! How do you take care them all???"
@@ -296,6 +394,7 @@ label edward:
 	say "dummy"
 	$ HidePolaroid()
 	$ EnableDialoguebox()
+	$ friends += 1
 	jump room_day
 
 label lauren:
@@ -309,8 +408,8 @@ label lauren:
 	say "dummy"
 	$ HidePolaroid()
 	$ EnableDialoguebox()
+	$ friends += 1
 	jump room_day
-
 
 
 
