@@ -1,0 +1,36 @@
+$ edward = GetEdwardVal()
+$ lauren = GetLaurenVal()
+$ lilli = GetLilliVal()
+$ maxine = GetMaxineVal()
+$ sarah = GetSarahVal()
+$ charles = GetCharlesVal()
+$ ShowBackgroundByName("your_room_day")
+say "Enter your name"
+$ SetPlayerName()
+$ player = GetPlayerName()
+
+say "You: All set up! Errr, still feels kinda empty, huh. Eh, I’ll get around to buying some more furniture eventu-"
+say "You: !"
+say "You: It's unlocked!"
+
+$ ShowPerson(maxine, 0, .1)
+say maxine "???: Howdy, neighbor! I saw you just moved in, so I wanted to stop by and introduce myself. I’m Maxine!"
+
+say "You: Oh, hey-hi-hello! Uh, I’m { player }. Nice to meet you!"
+
+say maxine "Maxine: Likewise!"
+say maxine "Maxine: I’ve got to run to work, but we should go grab lunch or something sometime if you’re down. Oh, also all the people around here are pretty friendly so you should go around and say hi to them."
+say maxine "Maxine: Anyways, gotta go now! Peace!"
+
+say "You: Bye!"
+
+$ ClearPeople()
+
+say "You: She was really nice! I should probably go meet the other neighbors."
+
+
+
+label room_day:
+	$ ShowBackgroundByName("your_room_day")
+
+
