@@ -7,15 +7,18 @@ public class SpriteSwitcher : MonoBehaviour
 {
 	private Image display;
 	private RectTransform rect;
+    private float defaultY;
 
 	[SerializeField] Sprite[] sprites;
+    [SerializeField] Color fadedColor;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
     	display = GetComponent<Image>();
     	rect = GetComponent<RectTransform>();
         display.sprite = sprites[0];
+        defaultY = rect.anchoredPosition.y;
     }
 
     public void ShowSprite(int i){
@@ -34,7 +37,19 @@ public class SpriteSwitcher : MonoBehaviour
     	display.enabled = false;
     }
 
-    public void SetPosition(float x, float y){
-    	rect.anchoredPosition = new Vector3(x, y);
+    public bool IsVisible{
+        get { return display.enabled; }
+    }
+
+    public void SetPosition(float x){
+    	rect.anchoredPosition = new Vector3(x, defaultY);
+    }
+
+    public void MakeFaded(){
+        display.color = fadedColor;
+    }
+
+    public void MakeUnfaded(){
+        display.color = Color.white;
     }
 }
