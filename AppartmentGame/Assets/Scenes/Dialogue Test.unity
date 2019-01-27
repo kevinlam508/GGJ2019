@@ -341,5 +341,10 @@ PrefabInstance:
       propertyPath: foodJenga
       value: 
       objectReference: {fileID: 741535030}
+    - target: {fileID: 5447632726827221543, guid: 44ca965ece4312949a7136f0df61fd5d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44ca965ece4312949a7136f0df61fd5d, type: 3}

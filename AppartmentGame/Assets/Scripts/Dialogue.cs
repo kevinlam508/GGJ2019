@@ -80,6 +80,8 @@ public class Dialogue : MonoBehaviour
     [SerializeField] AudioSource knocking;
     [SerializeField] AudioSource doorOpen;
     [SerializeField] AudioSource click;
+    [SerializeField] AudioSource timer;
+    [SerializeField] AudioSource cameraFlash;
 
     // Start is called before the first frame update
     void Start()
@@ -175,6 +177,8 @@ public class Dialogue : MonoBehaviour
             rumor.Bindings.Bind("HidePolaroid", HidePolaroid);
             rumor.Bindings.Bind("Knocking", () => { knocking.Play(); });
             rumor.Bindings.Bind("DoorOpen", () => { doorOpen.Play(); });
+            rumor.Bindings.Bind("Timer", () => { timer.Play(); });
+            rumor.Bindings.Bind("CameraFlash", () => { cameraFlash.Play(); });
 
             StartCoroutine(rumor.Start());
 
