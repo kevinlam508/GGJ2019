@@ -197,7 +197,13 @@ label maxine:
 		say "You: I'm keeping this god-awful cup."
 
 	$ ClearPeople()
-	jump room_night
+	$ DisableDialoguebox()
+	$ ShowBackgroundByName("Black_Background")
+	$ ShowPolaroid(0)
+	say "dummy"
+	$ HidePolaroid()
+	$ EnableDialoguebox()
+	jump room_day
 
 label couple:
 	$ ShowBackgroundByName("205_closed")
@@ -209,9 +215,11 @@ label couple:
 	say "You: Yeah, just wanted to drop by and say hi. I’m { player }."
 	say lilli "???: Nice to meet you! I’m Lilli and uh, one second…"
 	say "Lilli: Babe, come say hello to our new neighbor!"
+
 	$ ClearPeople()
 	$ ShowPerson(lilli, 0, .2)
 	$ ShowPerson(sarah, 0, .8)
+
 	say sarah "???: Sorry, was busy getting ready. I'm Sarah!"
 	say "You: { player }."
 	say sarah "Sarah: Lilli and I are heading over to an arcade downtown if you want to join us."
@@ -229,11 +237,22 @@ label couple:
 	$ ClearPeople()
 
 	say "You: There's so many games!"
-	say sarah "Sarah: Yeah, it’s the only arcade like this around here."
+	$ ShowPerson(sarah, 0, .8)
+	$ ShowPerson(lilli, 0, .2)
 
-	$ ClearPeople()
+	say sarah "Sarah: Yeah, it’s the only arcade like this around here."
+	say "You: Neat!"
+
 	$ GetTrinket(1, 1)
-	jump room_night
+	$ ClearPeople()
+	$ ShowBackgroundByName("black_background")
+	$ DisableDialoguebox()
+	$ ShowPolaroid(1)
+	say "dummy"
+	$ HidePolaroid()
+	$ EnableDialoguebox()
+	jump room_day
+
 
 label edward:
 	$ ShowBackgroundByName("203_closed")
@@ -269,14 +288,28 @@ label edward:
 	say edward "Edward: Lasagna time."
 	say "You: Heck ya!"
 
-	$ ClearPeople()
 	$ GetTrinket(2, 1)
-	jump room_night
+	$ ClearPeople()
+	$ ShowBackgroundByName("black_background")
+	$ DisableDialoguebox()
+	$ ShowPolaroid(2)
+	say "dummy"
+	$ HidePolaroid()
+	$ EnableDialoguebox()
+	jump room_day
 
 label lauren:
 	$ ShowBackgroundByName("201_closed")
 	$ GetTrinket(3, 1)
-	jump room_night
+
+	$ ClearPeople()
+	$ ShowBackgroundByName("black_background")
+	$ DisableDialoguebox()
+	$ ShowPolaroid(3)
+	say "dummy"
+	$ HidePolaroid()
+	$ EnableDialoguebox()
+	jump room_day
 
 
 
