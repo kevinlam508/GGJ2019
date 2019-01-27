@@ -16,8 +16,6 @@ $ SetPlayerName()
 $ player = GetPlayerName()
 
 
-
-
 say "You: All set up! Errr, still feels kinda empty, huh. Eh, I’ll get around to buying some more furniture eventu-"
 say "You: !"
 say "You: It's unlocked!"
@@ -38,7 +36,6 @@ $ ClearPeople()
 say "You: She was really nice! I should probably go meet the other neighbors."
 
 
-
 label room_day:
 	$ ShowBackgroundByName("your_room_day")
 
@@ -54,36 +51,57 @@ label stringlights_night:
 label hallway:
 	$ ShowBackgroundByName("hallway")
 	$ EnableDoors()
-	choice "door 1"
+	choice "door 1":
 		clear choices
 		if !maxine_done:
 			jump maxine
 		else:
 			say "You: I should try meeting somebody new today."
 			jump hallway
-	choice "door 2"
+	choice "door 2":
 		clear choices
 		if !couple_done:
 			jump couple
 		else:
 			say "You: I should try meeting somebody new today."
 			jump hallway
-	choice "door 3"
+	choice "door 3":
 		clear choices
-		if !couple_done:
-			jump couple
+		if !edward_done:
+			jump edward
 		else:
 			say "You: I should try meeting somebody new today."
 			jump hallway
+	choice "door 4":
+		clear choices
+		if !lauren_done:
+			jump lauren
+		else:
+			say "You: I should try meeting somebody new today."
+			jump hallway
+
 
 label maxine:
+	say "maxine"
+
+	$ maxine_done = true
+	jump room_night
 
 label couple:
+	say "couple"
+
+	$ couple_done = true
+	jump room_night
 
 label edward:
+	say "edward"
+	$ edward_done = true
+	jump room_night
 
 label lauren:
-
+	say "lauren"
+	$ lauren_done = true
+	jump room_night
 
 
 
