@@ -235,6 +235,7 @@ public class Dialogue : MonoBehaviour
     }
 
     void OnAddDialogue(object speaker, string text){
+        click.Play();
         if(speaker is int){
             if(((1 << ((int)speaker)) & currentPeople) != 0){
                 textBox.text += text;
