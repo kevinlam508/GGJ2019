@@ -113,7 +113,9 @@ public class Dialogue : MonoBehaviour
             rumor.Bindings.Bind("GetMaxineVal", GetMaxineVal);
             rumor.Bindings.Bind("GetSarahVal", GetSarahVal);
             rumor.Bindings.Bind("GetCharlesVal", GetCharlesVal);
+
             rumor.Bindings.Bind("StartingMinigame", StartingMinigame);
+
             rumor.Bindings.Bind<int, int, float>("ShowPerson", ShowPerson);
             rumor.Bindings.Bind<int>("HidePerson", HidePerson);
             rumor.Bindings.Bind<string>("ShowBackgroundByName",
@@ -121,6 +123,9 @@ public class Dialogue : MonoBehaviour
             rumor.Bindings.Bind<int>("UnfadePerson", UnfadePerson);
             rumor.Bindings.Bind<int>("FadePerson", FadePerson);
             rumor.Bindings.Bind("ClearPeople", ClearPeople);
+
+            rumor.Bindings.Bind("EnsableDialoguebox", EnsableDialoguebox);
+            rumor.Bindings.Bind("DisableDialoguebox", DisableDialoguebox);
             rumor.Bindings.Bind("EnableDoors", 
                 () => { EnableSpecialButtons(doors); });
             rumor.Bindings.Bind("EnableMenu", 
