@@ -6,7 +6,10 @@ $ sarah = GetSarahVal()
 $ charles = GetCharlesVal()
 $ friends = 0
 
-
+$ ShowBackgroundByName("title_card")
+$ DisableDialoguebox()
+say "dummy"
+$ EnableDialoguebox()
 $ ShowBackgroundByName("your_room_day")
 say "Enter your name"
 $ SetPlayerName()
@@ -16,7 +19,7 @@ $ player = GetPlayerName()
 say "You: All set up! Errr, still feels kinda empty, huh. Eh, I’ll get around to buying some more furniture eventu-"
 $ Knocking()
 say "???: *knock knock*"
-say "You: !"
+say "You: !!!"
 say "You: It's unlocked!"
 $ DoorOpen()
 
@@ -43,9 +46,25 @@ jump hallway
 label room_day:
 	$ ShowBackgroundByName("your_room_day")
 	$ SwitchToTrack( friends )
+	if friends == 4:
+		$ Knocking()
+		say "???: *Knock knock* Hey, it's Maxine!"
+		say "You: Come in!"
+		$ ShowPerson(maxine, 0, .8)
+		say maxine "Maxine: Just dropping in to let you know I'm having a hoouse party/ birthday party for my dog tonight!"
+		say "You: Yooo, that's really cute! What time should I be there?"
+		say maxine "Maxine: Come by around 7!"
+		say "You: Alright: I'll be there!"
+		say maxine "Maxine: See you then!"
+		$ DoorOpen()
+		$ ClearPeople()
+
 	$ EnableBedroom()
 	choice "the one":
-		jump hallway
+		if friends == 4:
+			jump the_end
+		else:
+			jump hallway
 	choose
 
 label hallway:
@@ -138,7 +157,7 @@ label maxine:
 	$ ShowBackgroundByName("snurglars_register")
 	$ ShowPerson(maxine, 0, .2)
 
-	say maxine "Are you ready to snurgle down some food?"
+	say maxine "Maxine: Are you ready to snurgle down some food?"
 	say "You: Is that a real expression people use here?"
 	say maxine "Maxine: Sure!"
 	say "You: I’ll take your word for it."
@@ -202,6 +221,7 @@ label maxine:
 	$ ClearPeople()
 	$ ShowBackgroundByName("black_background")
 	$ DisableDialoguebox()
+	$ CameraFlash()
 	$ ShowPolaroid(0)
 	say "dummy"
 	$ HidePolaroid()
@@ -248,7 +268,7 @@ label couple:
 	$ ShowPerson(lilli, 0, .2)
 
 	say sarah "Sarah: Yeah, it’s the only arcade like this around here."
-	say "You: Neat!"
+	say "You: Neat! I'm gonna look around."
 
 	$ skeez = false
 	$ dance = false
@@ -256,7 +276,7 @@ label couple:
 	$ galala = false
 
 	label arcade:
-		if skeez and dance and counter and galala:
+		if (skeez and dance and counter and galala):
 			jump home_planet
 		
 		$ EnableArcade()
@@ -302,9 +322,9 @@ label couple:
 				$ ClearPeople()
 				$ counter = true
 
-		choice "galal":
+		choice "galala":
 			clear choices
-			if galal:
+			if galala:
 				say "You: I should look at some other stuff."
 			else:
 				$ ShowPerson(lilli, 0, .2)
@@ -314,7 +334,7 @@ label couple:
 				say "You: Galalalalalalalalalalalalalalalalalalalalala"
 				say "You: Sorry, that was obnoxious."
 				$ ClearPeople()
-				$ galal = true
+				$ galala = true
 		choose
 
 	jump arcade
@@ -341,6 +361,7 @@ label home_planet:
 	$ ClearPeople()
 	$ ShowBackgroundByName("black_background")
 	$ DisableDialoguebox()
+	$ CameraFlash()
 	$ ShowPolaroid(1)
 	say "dummy"
 	$ HidePolaroid()
@@ -378,11 +399,12 @@ label edward:
 	say "You: oh"
 	say edward "Edward: There’s more expensive hobbies."
 	say "You: Like shooting gold plated rockets to the moon."
-	say edward "Edward: *chuckles* Sure."
+	say edward "Edward: Heh, sure."
 	say edward "Edward: Oh! I have a money tree I’ve been trying to find a better home for if you want it. Uh, you could consider it a house warming gift."
 	say "You: Yoooo, I'd love it! I think it'd really brighten the place up."
 	say edward "Edward: Plants are good for that."
-	say "Timer: BEEP BEEP BEEP"
+	$ Timer()
+	say "Timer: RINGRINGRINGRING"
 	say edward "Edward: Lasagna time."
 	say "You: Heck ya!"
 
@@ -390,6 +412,7 @@ label edward:
 	$ ClearPeople()
 	$ ShowBackgroundByName("black_background")
 	$ DisableDialoguebox()
+	$ CameraFlash()
 	$ ShowPolaroid(2)
 	say "dummy"
 	$ HidePolaroid()
@@ -399,11 +422,42 @@ label edward:
 
 label lauren:
 	$ ShowBackgroundByName("201_closed")
-	$ GetTrinket(3, 1)
+	$ Knocking()
+	say "You: *knock knock*"
+	say "..."
+	$ Knocking()
+	say "You: *knock knock*"
+	say "..."
+	say "You: Looks like nobody's home."
+	$ ShowBackgroundByName("201_open")
+	$ ShowPerson(lauren, 0, .5)
+	say lauren "???: …hello?"
+	say "You: Oh hi! I uh, hope I’m not bothering you or anything."
+	say lauren "???: *yawnnn* Oh no, I just woke up, haha. I’m Lauren. I guess you must be the new neighbor."
+	say "Yeah, my name's { player }."
+	say "By the way, I really like the glasswork-piece-thing you have behind you."
+	say lauren "Lauren: Oh, thanks! That's something I made, actually."
+	say "Ayyy, that's dope! Did you hear about the new modern art exhibit in the museum accross the street? I think it's open for free if you want to go see it."
+	say lauren "That sounds really cool! Maybe come by in like an hour and we can check it out?"
+	say "You: Sounds good!"
 
+	$ ClearPeople()
+	$ ShowBackgroundByName("museum")
+	$ SwitchToTrack(8)
+
+	say "You: Wow, look at all this abstract art. I can’t really make sense of much of it, but it sure is nice to look at."
+
+	$ ShowPerson(lauren, 0, .8)
+	say lauren "Lauren: *points at painting* I love the colors and shapes in that one."
+	say "You: I think I saw them selling prints of it when we passed the giftshop."
+	say lauren "Lauren: We should go check that out before we leave."
+
+
+	$ GetTrinket(3, 1)
 	$ ClearPeople()
 	$ ShowBackgroundByName("black_background")
 	$ DisableDialoguebox()
+	$ CameraFlash()
 	$ ShowPolaroid(3)
 	say "dummy"
 	$ HidePolaroid()
@@ -411,7 +465,12 @@ label lauren:
 	$ friends += 1
 	jump room_day
 
-
+label the_end:
+	$ ClearPeople()
+	$ ShowBackgroundByName("black_background")
+	$ DisableDialoguebox()
+	$ CameraFlash()
+	$ ShowPolaroid(4)
 
 
 
