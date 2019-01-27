@@ -97,6 +97,8 @@ public class Dialogue : MonoBehaviour
             rumor.Bindings.Bind<int, int, float>("ShowPerson", ShowPerson);
             rumor.Bindings.Bind<int>("HidePerson", HidePerson);
             rumor.Bindings.Bind<int>("ShowBackground", ShowBackground);
+            rumor.Bindings.Bind<string>("ShowBackgroundByName",
+                ShowBackgroundByName);
             rumor.Bindings.Bind<int>("UnfadePerson", UnfadePerson);
             rumor.Bindings.Bind<int>("FadePerson", FadePerson);
             rumor.Bindings.Bind("ClearPeople", ClearPeople);
@@ -315,6 +317,10 @@ public class Dialogue : MonoBehaviour
                 }
             }
         }
+    }
+
+    void ShowBackgroundByName(string name){
+        Debug.Log(name);
     }
 
     void ShowBackground(int background){
