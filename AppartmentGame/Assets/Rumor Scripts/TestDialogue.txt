@@ -7,7 +7,12 @@ $ ShowBackground(1)
 $ ShowPerson(edward, 0, .1)
 $ ShowPerson(lauren, 0, .5)
 $ ShowPerson(lilli, 0, .9)
+say "Enter your name"
+$ SetPlayerName()
+$ player = GetPlayerName()
+say "{ player } is the name"
 say edward "edward"
+say edward + lilli "edward and lilli"
 say lauren "laruen"
 say lilli "lilli"
 say lauren "laruen"
