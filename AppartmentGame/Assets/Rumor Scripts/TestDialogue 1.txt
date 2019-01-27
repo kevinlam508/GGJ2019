@@ -24,7 +24,8 @@ say maxine "???: Howdy, neighbor! I saw you just moved in, so I wanted to stop b
 say "You: Oh, hey-hi-hello! Uh, I’m { player }. Nice to meet you!"
 
 say maxine "Maxine: Likewise!"
-say maxine "Maxine: I’ve got to run to work, but we should go grab lunch or something sometime if you’re down. Oh, also all the people around here are pretty friendly so you should go around and say hi to them."
+say maxine "Maxine: I’ve got to run to work, but we should go grab lunch or something sometime if you’re down."
+say maxine "Maxine: Oh, also all the people around here are pretty friendly so you should go around and say hi to them."
 say maxine "Maxine: Anyways, gotta go now! Peace!"
 
 say "You: Bye!"
@@ -145,8 +146,57 @@ label maxine:
 	say "You: Like, what even are loaded chicken tendies?! What are they loaded with? I have so many questions!"
 	say maxine "Maxine: Just roll with it!"
 
+	$ EnableMenu()
+	choice "food 1":
+		clear choices
+		say "You: I’ll have the snurgle burgle!"
 
-	$ GetTrinket(0, 1)
+	choice "food 2":
+		clear choices
+		say "You: Loaded tendies, please!"
+
+	choice "food 3":
+		clear choices
+		say "You: One chicken fried eggy, please!"
+	choose
+
+	$ ShowPerson(maxine, 0, .5)
+	$ ShowBackgroundByName("snurglars_table")
+	
+
+	say "You: Holy shit, these are like, really good?!!!"
+	say maxine "Maxine: I told you!"
+	say "You: Wait, what is that you got???"
+	say maxine "Maxine: The trash platter SUPREMEEEEEEEEEEEE"
+	say "You: Was that on the menu???"
+	say maxine "Maxine: Nahhh, I think it’s supposed to be like a secret item."
+	say maxine "Maxine: Gotta be in the know, ya know?"
+	say maxine "Maxine: Errr, actually, can you help me finish this?"
+	say "You: uh"
+	say maxine "Maxine: They’ll give us snurglar bobbleheads if we eat it all!"
+	say "You: uhhhhhhhhhhhhhh"
+
+	$ ClearPeople()
+	$ StartFoodJenga()
+	pause 0
+
+	$ ShowBackgroundByName("snurglars_table")
+	$ ShowPerson(maxine, 0, .5)
+
+	if IsWinMinigame():
+		$ GetTrinket(0, 1)
+		say "You: Oh god."
+		say "You: …I think food might be ruined for me now"
+		say maxine "Maxine: I never want to eat again... but bobbleheads!"
+		say "You: Bobbleheads!"
+
+	else:
+		$ GetTrinket(0, 2)
+		say "You: Alright, I can't eat anymore."
+		say maxine "Maxine: That was a bad idea."
+		say "You: I'm keeping this god-awful cup."
+
+	$ ClearPeople()
 	jump room_night
 
 label couple:
@@ -181,18 +231,50 @@ label couple:
 	say "You: There's so many games!"
 	say sarah "Sarah: Yeah, it’s the only arcade like this around here."
 
+	$ ClearPeople()
 	$ GetTrinket(1, 1)
 	jump room_night
 
 label edward:
 	$ ShowBackgroundByName("203_closed")
+	say "You: *knock knock*"
+	$ ShowBackgroundByName("203_open")
+	$ ShowPerson(edward, 0, .5)
+	say edward "???: Hello?"
+	say "You: Yooo, do I smell lasagna?"
+	say edward "???: Uh…. yes? Are you the new person?"
+	say "You: Oh, yeah! My name’s { player }."
+	say edward "???: Edward."
+	say edward "Edward: ..."
+	say edward "Edward: Errr, were you wanting to come in and join me for lunch?"
+	say "You: Wait, I didn’t mean to make it seem like-  "
+	say edward "Edward: Sorry, that came out kinda rude, like, I mean it's fine."
+	say "You: Oh, well uh, sure???"
 
+	$ ShowBackgroundByName("edward_room")
+	$ ClearPeople()
+	$ ShowPerson(edward, 0, .2)
+
+	say edward "Edward: Make yourself at home. The lasagna should be done soon."
+	say "You: There’s so many plants! How do you take care them all???"
+	say edward "Edward: A moderately high-water bill?"
+	say "You: oh"
+	say edward "Edward: There’s more expensive hobbies."
+	say "You: Like shooting gold plated rockets to the moon."
+	say edward "Edward: *chuckles* Sure."
+	say edward "Edward: Oh! I have a money tree I’ve been trying to find a better home for if you want it. Uh, you could consider it a house warming gift."
+	say "You: Yoooo, I'd love it! I think it'd really brighten the place up."
+	say edward "Edward: Plants are good for that."
+	say "Timer: BEEP BEEP BEEP"
+	say edward "Edward: Lasagna time."
+	say "You: Heck ya!"
+
+	$ ClearPeople()
 	$ GetTrinket(2, 1)
 	jump room_night
 
 label lauren:
 	$ ShowBackgroundByName("201_closed")
-
 	$ GetTrinket(3, 1)
 	jump room_night
 
