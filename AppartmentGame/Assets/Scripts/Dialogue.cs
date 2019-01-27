@@ -65,6 +65,7 @@ public class Dialogue : MonoBehaviour
     private static int NO_TRINKET = 0;
     private int[] trinketState;
     int numTrinkets = 0;
+    [SerializeField] GameObject trinkets;
 
     // Start is called before the first frame update
     void Start()
@@ -358,12 +359,15 @@ public class Dialogue : MonoBehaviour
 
     void ShowBackgroundByName(string name){
         Debug.Log(name);
+        HideTrinkets();
         switch(name){
             case "your_room_day":
                 ShowBackground(Background.YOUR_ROOM_DAY);
+                ShowTrinkets();
                 break;
             case "your_room_night":
                 ShowBackground(Background.YOUR_ROOM_NIGHT);
+                ShowTrinkets();
                 break;
             case "stringlights_day":
                 ShowBackground(Background.STRINGLIGHTS_DAY);
@@ -435,6 +439,20 @@ public class Dialogue : MonoBehaviour
     void ClearPeople(){
         for(int i = 0; i < peopleModels.Length; ++i)
             HidePerson(1 << i);
+    }
+
+    void HideTrinkets(){
+        trinkets.SetActive(false);
+    }
+
+    void ShowTrinkets(){
+        trinkets.SetActive(true);
+        for(int i = 0; i < trinketState.Length; ++i){
+            if(trinketState[i] > 0){
+                trinkets.transform.GetChild((2 * i) - 1 + trinketState[i])
+                    .gameObject.SetActive(true);
+            }
+        }
     }
 
 #if UNITY_EDITOR
