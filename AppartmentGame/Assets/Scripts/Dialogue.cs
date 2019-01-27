@@ -9,6 +9,10 @@ public enum People { EDWARD, LAUREN, MAXINE, LILLI, SARAH, CHARLES, PLAYER };
 
 public class Dialogue : MonoBehaviour
 {
+    // player name
+    private bool playerNameSet = false;
+    private string playerName = "";
+    [SerializeField] InputField nameField;
 
     // rumor script for the dialogue
     [SerializeField] Text textBox;
@@ -19,9 +23,10 @@ public class Dialogue : MonoBehaviour
 	private Rumor rumor;
 
     // people sprites
-    private People currentPerson;
+    private int currentPeople;
     private float screenWidth;
     [SerializeField] SpriteSwitcher[] peopleModels;
+    private Dictionary<int, People> flagToPerson;
 
     // backgrounds
     [SerializeField] SpriteSwitcher backgrounds;
@@ -61,30 +66,16 @@ public class Dialogue : MonoBehaviour
         DisableChoices();
 
         // set up doors
-        for(int i = 0; i < doors.transform.childCount; ++i){
-            int temp = i;
-            doors.transform.GetChild(i).GetComponent<Button>().onClick
-                .AddListener(() => { 
-                    Choose(temp); 
-                    DisableDoors();
-                    });
-        }
-        DisableDoors();
+        SetUpSpecialButtons(doors);
 
         // set up menu
-        for(int i = 0; i < menu.transform.childCount; ++i){
-            int temp = i;
-            menu.transform.GetChild(i).GetComponent<Button>().onClick
-                .AddListener(() => { 
-                    Choose(temp); 
-                    DisableMenu();
-                    });
-        }
-        DisableDoors();
+        SetUpSpecialButtons(menu);
 
 #if UNITY_EDITOR
         if(rumorScript != null){
 #endif
+            InitPeopleDictionary();
+
             // set up script
             rumor = new Rumor(rumorScript.text);
 
@@ -103,15 +94,19 @@ public class Dialogue : MonoBehaviour
             rumor.Bindings.Bind("GetSarahVal", GetSarahVal);
             rumor.Bindings.Bind("GetCharlesVal", GetCharlesVal);
             rumor.Bindings.Bind("StartingMinigame", StartingMinigame);
-            rumor.Bindings.Bind<People, int, float>("ShowPerson", ShowPerson);
-            rumor.Bindings.Bind<People>("HidePerson", HidePerson);
+            rumor.Bindings.Bind<int, int, float>("ShowPerson", ShowPerson);
+            rumor.Bindings.Bind<int>("HidePerson", HidePerson);
             rumor.Bindings.Bind<int>("ShowBackground", ShowBackground);
-            rumor.Bindings.Bind<People>("UnfadePerson", UnfadePerson);
-            rumor.Bindings.Bind<People>("FadePerson", FadePerson);
+            rumor.Bindings.Bind<int>("UnfadePerson", UnfadePerson);
+            rumor.Bindings.Bind<int>("FadePerson", FadePerson);
             rumor.Bindings.Bind("ClearPeople", ClearPeople);
-            rumor.Bindings.Bind("EnableDoors", EnableDoors);
+            rumor.Bindings.Bind("EnableDoors", 
+                () => { EnableSpecialButtons(doors); });
+            rumor.Bindings.Bind("EnableMenu", 
+                () => { EnableSpecialButtons(menu); });
+            rumor.Bindings.Bind("GetPlayerName", GetPlayerName);
+            rumor.Bindings.Bind("SetPlayerName", SetPlayerName);
 
-            // start dialogue
             StartCoroutine(rumor.Start());
 
 #if UNITY_EDITOR
@@ -120,6 +115,13 @@ public class Dialogue : MonoBehaviour
             DialogueError("No rumor script on " + gameObject + "'s component");
         }
 #endif
+    }
+
+    void InitPeopleDictionary(){
+        flagToPerson = new Dictionary<int, People>();
+        for(int i = 0; i < (int)People.PLAYER; ++i){
+            flagToPerson.Add(1 << i, (People)i);
+        }
     }
 
     // Update is called once per frame
@@ -140,28 +142,30 @@ public class Dialogue : MonoBehaviour
     // events
     void OnSetDialogue(object speaker, string text){
     	textBox.text = text;
-        if(speaker is People){
-            People person = (People)speaker;
-            currentPerson = person;
+        if(speaker is int){
+            int flag = (int)speaker;
+            currentPeople = flag;
             for(int i = 0; i < peopleModels.Length; ++i){
-                if(peopleModels[i].IsVisible && i != (int)person){
-                    FadePerson((People)i);
+                if(peopleModels[i].IsVisible && ((1 << i) & flag) == 0){
+                    FadePerson(1 << i);
                 }
             }
-            UnfadePerson(person);
+            UnfadePerson(flag);
         }
         else {
             for(int i = 0; i < peopleModels.Length; ++i){
                 if(peopleModels[i].IsVisible){
-                    FadePerson((People)i);
+                    FadePerson(1 << i);
                 }
             }
         }
     }
 
     void OnAddDialogue(object speaker, string text){
-        if(speaker is People && ((People)speaker) == currentPerson){
-            textBox.text += text;
+        if(speaker is int){
+            if(((1 << ((int)speaker)) & currentPeople) != 0){
+                textBox.text += text;
+            }
         }
     }
 
@@ -197,30 +201,29 @@ public class Dialogue : MonoBehaviour
         dialogueBox.SetActive(false);
     }
 
-    void EnableDoors(){
+    void EnableSpecialButtons(GameObject buttonParent){
         ClearPeople();
         DisableDialoguebox();
-        doors.SetActive(true);
+        buttonParent.SetActive(true);
         useButtons = false; // using special buttons
     }
 
-    void DisableDoors(){
+    void DisableSpecialButton(GameObject buttonParent){
         EnableDialoguebox();
-        doors.SetActive(false);
+        buttonParent.SetActive(false);
         useButtons = true; // stop special buttons
     }
 
-    void EnableMenu(){
-        ClearPeople();
-        DisableDialoguebox();
-        menu.SetActive(true);
-        useButtons = false; // using special buttons
-    }
-
-    void DisableMenu(){
-        EnableDialoguebox();
-        menu.SetActive(false);
-        useButtons = true; // stop special buttons
+    void SetUpSpecialButtons(GameObject buttonParent){
+        for(int i = 0; i < buttonParent.transform.childCount; ++i){
+            int temp = i;
+            buttonParent.transform.GetChild(i).GetComponent<Button>().onClick
+                .AddListener(() => { 
+                    Choose(temp); 
+                    DisableSpecialButton(buttonParent);
+                    });
+        }
+        DisableSpecialButton(buttonParent);
     }
 
     public void Choose(int n){
@@ -228,65 +231,90 @@ public class Dialogue : MonoBehaviour
     }
 
     // script controls
-    People GetEdwardVal(){
-        return People.EDWARD;
+    int GetEdwardVal(){
+        return 1 << (int)People.EDWARD;
     }
-    People GetLaurenVal(){
-        return People.LAUREN;
+    int GetLaurenVal(){
+        return 1 << (int)People.LAUREN;
     }
-    People GetMaxineVal(){
-        return People.MAXINE;
+    int GetMaxineVal(){
+        return 1 << (int)People.MAXINE;
     }
-    People GetLilliVal(){
-        return People.LILLI;
+    int GetLilliVal(){
+        return 1 << (int)People.LILLI;
     }
-    People GetSarahVal(){
-        return People.SARAH;
+    int GetSarahVal(){
+        return 1 << (int)People.SARAH;
     }
-    People GetCharlesVal(){
-        return People.CHARLES;
+    int GetCharlesVal(){
+        return 1 << (int)People.CHARLES;
     }
+
+    string GetPlayerName(){
+        return playerName;
+    }
+    void SetPlayerName(){
+        playerName = nameField.text;
+        nameField.gameObject.SetActive(false);
+    }
+
 
     void StartingMinigame(){
         GameState.state = State.MINIGAME;
     }
 
-    void ShowPerson(People person, int sprite, float relPos){
+    void ShowPerson(int person, int sprite, float relPos){
 #if UNITY_EDITOR
-        if((int)person > peopleModels.Length || (int)person < 0){
-            DialogueError("Person " + (int)person + " no loaded");
+        if(person > (1 << peopleModels.Length) || person < 0){
+            DialogueError("Person flag error");
         }
 #endif
 
-        peopleModels[(int)person].ShowSprite(sprite);
-        peopleModels[(int)person].SetPosition(relPos * screenWidth);
+        peopleModels[(int)flagToPerson[person]].ShowSprite(sprite);
+        peopleModels[(int)flagToPerson[person]].SetPosition(relPos * screenWidth);
     }
 
-    void HidePerson(People person){
+    void HidePerson(int person){
 #if UNITY_EDITOR
-        if((int)person > peopleModels.Length || (int)person < 0){
-            DialogueError("Person " + (int)person + " no loaded");
+        if(person > (1 << peopleModels.Length) || person < 0){
+            DialogueError("Person flag error");
         }
 #endif
-        peopleModels[(int)person].HideSprite();
+        peopleModels[(int)flagToPerson[person]].HideSprite();
     }
 
-    void FadePerson(People person){
+    void FadePerson(int people){
 #if UNITY_EDITOR
-        if((int)person > peopleModels.Length || (int)person < 0){
-            DialogueError("Person " + (int)person + " no loaded");
+        if(people > (1 << peopleModels.Length) || people < 0){
+            DialogueError("Person flag error");
         }
 #endif
-        peopleModels[(int)person].MakeFaded();
+        for(int i = 0; i < (int)People.PLAYER; ++i){
+            int currentFlag = (1 << i) & people;
+            if(currentFlag != 0){
+                People current = flagToPerson[currentFlag];
+                if(peopleModels[(int)current].IsVisible){
+                    peopleModels[(int)current].MakeFaded();
+                }
+            }
+        }
     }
 
-    void UnfadePerson(People person){
+    void UnfadePerson(int people){
 #if UNITY_EDITOR
-        if((int)person > peopleModels.Length || (int)person < 0){
-            DialogueError("Person " + (int)person + " no loaded");
+        if(people > (1 << peopleModels.Length) || people < 0){
+            DialogueError("Person flag error");
         }
 #endif
-        peopleModels[(int)person].MakeUnfaded();
+        for(int i = 0; i < (int)People.PLAYER; ++i){
+            int currentFlag = (1 << i) & people;
+            if(currentFlag != 0){
+                People current = flagToPerson[currentFlag];
+                if(peopleModels[(int)current].IsVisible){
+                    peopleModels[(int)current].MakeUnfaded();
+                }
+            }
+        }
     }
 
     void ShowBackground(int background){
@@ -295,7 +323,7 @@ public class Dialogue : MonoBehaviour
 
     void ClearPeople(){
         for(int i = 0; i < peopleModels.Length; ++i)
-            HidePerson((People)i);
+            HidePerson(1 << i);
     }
 
 #if UNITY_EDITOR
