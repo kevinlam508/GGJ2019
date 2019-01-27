@@ -27,7 +27,8 @@ public enum Background {
     EDWARD_ROOM,
     NIGHT_TRANSITION,
     BLACK,
-    ARCADE_GAME
+    ARCADE_GAME,
+    TITLE
 };
 
 public class Dialogue : MonoBehaviour
@@ -483,7 +484,9 @@ public class Dialogue : MonoBehaviour
             case "arcade_game":
                 ShowBackground(Background.ARCADE_GAME);
                 break;
-
+            case "title_card"
+                ShowBackground(Background.TITLE);
+                break;
         }
     }
 
