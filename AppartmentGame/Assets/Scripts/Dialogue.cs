@@ -34,11 +34,13 @@ public enum Background {
 public class Dialogue : MonoBehaviour
 {
     // player name
+    [Header("Player Name")]
     private bool playerNameSet = false;
     private string playerName = "";
     [SerializeField] InputField nameField;
 
     // rumor script for the dialogue
+    [Header("Rumor")]
     [SerializeField] Text textBox;
     [SerializeField] GameObject dialogueBox;
     [SerializeField] TextAsset rumorScript;
@@ -47,15 +49,19 @@ public class Dialogue : MonoBehaviour
 	private Rumor rumor;
 
     // people sprites
+    [Header("Characters")]
     private int currentPeople;
     private float screenWidth;
     [SerializeField] SpriteSwitcher[] peopleModels;
     private Dictionary<int, People> flagToPerson;
 
     // backgrounds
+    [Header("Background")]
     [SerializeField] SpriteSwitcher backgrounds;
+    [SerializeField] Text titleText;
 
     // choices
+    [Header("Buttons")]
     private bool useButtons = true;
     [SerializeField] GameObject choices;
     private Text[] choiceText;
@@ -67,6 +73,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] GameObject bedroom;
 
     // progress tracking
+    [Header("Trinkets")]
     private static int NO_TRINKET = 0;
     private int[] trinketState;
     int numTrinkets = 0;
@@ -74,9 +81,11 @@ public class Dialogue : MonoBehaviour
     [SerializeField] SpriteSwitcher polaroid;
 
     // minigames
+    [Header("Minigames")]
     [SerializeField] GameObject foodJenga;
 
     // sound mixer
+    [Header("Audio")]
     [SerializeField] SoundMixer soundMixer;
 
     [SerializeField] AudioSource knocking;
@@ -85,6 +94,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] AudioSource timer;
     [SerializeField] AudioSource cameraFlash;
 
+    [Header("Special Effects")]
     [SerializeField] PolaroidFlash flashEffect;
 
     // Start is called before the first frame update
@@ -213,7 +223,7 @@ public class Dialogue : MonoBehaviour
     {
         if(rumor != null && GameState.state == State.DIALOGUE){
             rumor.Update(Time.deltaTime);
-            if(Input.GetButtonDown("Submit")){
+            if(Input.GetKeyDown(KeyCode.Space)){
                 rumor.Advance();
             }
         }
@@ -501,7 +511,8 @@ public class Dialogue : MonoBehaviour
 
     void ShowBackground(Background background){
         EnableBackground();
-        backgrounds.ShowSprite((int)background);     
+        backgrounds.ShowSprite((int)background);
+        titleText.gameObject.SetActive(background == Background.TITLE);
     }
 
     void DisableBackground(){
